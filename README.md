@@ -11,13 +11,13 @@ Zoom level is how far you wish to be able to zoom into your image. think of it a
 
 To figure out how many tiles you will get for a given zoom level, use the following formula:
 
-$ n = 2^z $
+$n = 2^z$
 
 Where $n$ is the number of tiles and $z$ is the desired zoom level.
 
 To get the correct size for your maximum zoom level, ensure that your full image has the size PxP, where P is defined as:
 
-$ P = 256 * 2^z $
+$P = 256 * 2^z$
 
 and z is defined as your maximum zoom level.
 
