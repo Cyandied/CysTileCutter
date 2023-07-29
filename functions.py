@@ -18,7 +18,7 @@ def checkImage(img:Img) -> list[bool,str]:
         return False, "\nImage size MUST be some multiple of 256!"
     return True, "\nImage correct proportion and size, cutting begins now..."
 
-def cut(zoom_lvl:int, img:Img):
+def cut(zoom_lvl:int, img:Img, max_zoom:int):
     tiles = []
     nr_of_tiles = 2**zoom_lvl
     w, h = img.size
@@ -36,8 +36,8 @@ def cut(zoom_lvl:int, img:Img):
         mkdir(join("result",str(zoom_lvl),str(i)))
         for j,y_img in enumerate(x_set):
             w,h = y_img.size
-            if w/2 > 256:
-                y_img = y_img.resize((int(w/2),int(h/2)))
+            if w*zoom_lvl/max_zoom > 256:
+                y_img = y_img.resize((int(w*zoom_lvl/max_zoom),int(h*zoom_lvl/max_zoom)))
             y_img.save(join("result",str(zoom_lvl),str(i),str(j)+".png"),"png")
     return
 
@@ -52,12 +52,12 @@ def runProgram(max_zoom:int):
         mkdir(join("result",str(zoom_level)))
         mkdir(join("result",str(zoom_level),"0"))
         w,h = source_img.size
-        to_save = source_img.resize((int(w/2),int(h/2)))
+        to_save = source_img.resize((int(w/max_zoom),int(h/max_zoom)))
         to_save.save(join("result","0","0","0.png"),"png")
         zoom_level += 1
         while zoom_level <= max_zoom:
             mkdir(join("result",str(zoom_level)))
             print(f'\nCutting zoom level {zoom_level}...')
-            cut(zoom_level,source_img)
+            cut(zoom_level,source_img,max_zoom)
             zoom_level += 1
         print("\nFinished! Find your tiles in the results folder!")
