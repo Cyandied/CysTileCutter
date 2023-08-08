@@ -32,8 +32,9 @@ and z is defined as your maximum zoom level.
         - Image should be of the highest quality possible
 - Define your zoom level by changing the number in the function ```runProgram(x)```, the default is 4
 - Run the program with ```python program.py```
-- Find your tiles in the ***result*** folder!
+- Find your tiles in the ***map_tiles*** folder!
     - Remember to void this folder if you want to run the program again!
+    - Zipping this folder is all you need to do to make this work with my CysMaps project!
 ## Why can I not use any size image I want?
 I am making this to work easily with [Leaflet](https://leafletjs.com/), and I enjoy using common conventions.
 
