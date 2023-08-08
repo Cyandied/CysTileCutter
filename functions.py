@@ -33,12 +33,12 @@ def cut(zoom_lvl:int, img:Img, max_zoom:int):
 
 
     for i,x_set in enumerate(tiles):
-        mkdir(join("result",str(zoom_lvl),str(i)))
+        mkdir(join("map_tiles",str(zoom_lvl),str(i)))
         for j,y_img in enumerate(x_set):
             w,h = y_img.size
             if w*zoom_lvl/max_zoom > 256:
-                y_img = y_img.resize((int(w*zoom_lvl/max_zoom),int(h*zoom_lvl/max_zoom)))
-            y_img.save(join("result",str(zoom_lvl),str(i),str(j)+".png"),"png")
+                y_img = y_img.resize((int(w*zoom_lvl/max_zoom/2),int(h*zoom_lvl/max_zoom/2)))
+            y_img.save(join("map_tiles",str(zoom_lvl),str(i),str(j)+".png"),"png")
     return
 
 def runProgram(max_zoom:int):
@@ -49,15 +49,15 @@ def runProgram(max_zoom:int):
     print(message)
     if cont:
         zoom_level = 0
-        mkdir(join("result",str(zoom_level)))
-        mkdir(join("result",str(zoom_level),"0"))
+        mkdir(join("map_tiles",str(zoom_level)))
+        mkdir(join("map_tiles",str(zoom_level),"0"))
         w,h = source_img.size
         to_save = source_img.resize((int(w/max_zoom),int(h/max_zoom)))
-        to_save.save(join("result","0","0","0.png"),"png")
+        to_save.save(join("map_tiles","0","0","0.png"),"png")
         zoom_level += 1
         while zoom_level <= max_zoom:
-            mkdir(join("result",str(zoom_level)))
+            mkdir(join("map_tiles",str(zoom_level)))
             print(f'\nCutting zoom level {zoom_level}...')
             cut(zoom_level,source_img,max_zoom)
             zoom_level += 1
-        print("\nFinished! Find your tiles in the results folder!")
+        print("\nFinished! Find your tiles in the map_tiless folder!")
