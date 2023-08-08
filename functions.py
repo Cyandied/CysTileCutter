@@ -60,4 +60,4 @@ def runProgram(max_zoom:int):
             print(f'\nCutting zoom level {zoom_level}...')
             cut(zoom_level,source_img,max_zoom)
             zoom_level += 1
-        print("\nFinished! Find your tiles in the map_tiless folder!")
+        print("\nFinished! Find your tiles in the map_tiles folder!")
